@@ -1498,7 +1498,16 @@
         'name': 'storage.type.class.jsdoc'
       }
       {
-        'match': '({\\b(?:[a-zA-Z_$][a-zA-Z_$0-9]*)\\b})\\s\\b([a-zA-Z_$][a-zA-Z_$0-9]*)\\b\\s*((?:(?!\\*\\/).)*)'
+        # match Closure Compiler-style type annotations
+        #   string
+        #   { foo: number }
+        #   !Object
+        #   ?
+        #   *
+        #   union | type
+        #   intersection & type
+        #   Map<string, T>
+        'match': '({[!a-zA-Z_$0-9|&?*{}<>:, ]+})\\s\\b([a-zA-Z_$][a-zA-Z_$0-9]*)\\b\\s*((?:(?!\\*\\/).)*)'
         'captures':
             0:
               'name': 'other.meta.jsdoc'
